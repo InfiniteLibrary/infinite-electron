@@ -14,6 +14,7 @@
     "import/no-unresolved": ["error", { "ignore": ["electron"] }],
     "import/no-extraneous-dependencies": "off",
     "no-console": 0,
+    "no-plusplus": 0,
     "no-use-before-define": "off",
     "promise/param-names": 2,
     "promise/always-return": 2,
@@ -29,12 +30,5 @@
     "promise",
     "compat",
     "react"
-  ],
-  "settings": {
-    "import/resolver": {
-      "webpack": {
-        "config": "webpack.config.eslint.js"
-      }
-    }
-  }
+  ]
 }

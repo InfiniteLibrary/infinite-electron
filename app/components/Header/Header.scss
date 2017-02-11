@@ -1,0 +1,15 @@
+.Header__container {
+	padding: 80px 50px;
+	border-bottom: 1px solid #ddd;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.Header__title {
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	font-weight: 200;
+	font-size: 24px;
+}
