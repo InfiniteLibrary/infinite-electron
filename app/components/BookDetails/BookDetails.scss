@@ -1,0 +1,37 @@
+@import "../../variables.scss";
+
+$book-details-base-height: 500px;
+
+.book-details {
+  background-color: $dark-gray;
+  display: flex;
+  flex-direction: row;
+  height: $book-details-base-height;
+
+  &__cover {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: $base-spacing;
+    margin-right: $base-spacing;
+
+    &__image {
+      max-height: ($book-details-base-height - 50);
+    }
+  }
+
+  &__info {
+    color: #fff;
+    flex: 1;
+    margin-left: $base-spacing;
+    margin-right: $base-spacing;
+    margin-top: $base-spacing * 2;
+
+    &__title {}
+    &__author {}
+    &__meta {}
+    &__description {}
+  }
+}
