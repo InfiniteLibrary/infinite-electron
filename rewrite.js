@@ -8,11 +8,11 @@ const { publications } = require(`./${process.argv[2]}`);
 const { omit } = require('lodash');
 
 const findLinks = links => {
-  const image = links.find(link => link['opds:image']);
-  const download = links.find(link => link['opds:acquisition:open-access']);
+  const image = links['opds:image'];
+  const download = links['opds:acquisition:open-access'];
   const result = {};
   if (image) {
-    const imageUrl = image['opds:image']
+    const imageUrl = image
       .href
       .replace('&zoom=1', '');
 
@@ -22,10 +22,13 @@ const findLinks = links => {
     }
   }
 
-  if (download) {
-    result.download = download['opds:acquisition:open-access']
-      .href
-      .replace('http://localhost:8000', 'https://unglue.it');
+  if (download && download.length) {
+    const epub = download.find(target => target.type.includes('epub'));
+    if (epub) {
+      result.download = epub
+        .href
+        .replace('http://localhost:8000', 'https://unglue.it');
+    }
   }
 
   return result;
@@ -37,10 +40,11 @@ const rewritten = publications.map(publication => {
   const idParts = publication.id.split('/');
   const id = Number(idParts[idParts.length - 2]);
   return Object.assign({},
-    omit(publication, 'Rating', '_links'),
+    omit(publication, 'Rating', '_links', 'contributor'),
     links,
     {
       id,
+      author: publication.contributor,
       // Randomly select books as own:
       isOwn: Math.random() > 0.993
     }
