@@ -3,10 +3,11 @@ import './BookDetails.scss';
 
 export default class BookDetails extends Component {
   render() {
+    const { title, coverUrl } = this.props.book;
     return (
       <div className="book-details">
         <div className="book-details__cover">
-          <img src={this.props.coverUrl} className="book-details__cover__image" />
+          <img alt={title} src={coverUrl} className="book-details__cover__image" />
         </div>
         <div className="book-details__info">
           <h1 className="book-details__info__title">Moby Dick</h1>
