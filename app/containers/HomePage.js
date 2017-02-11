@@ -4,7 +4,10 @@ import Home from '../components/Home';
 export default class HomePage extends Component {
   render() {
     return (
-      <Home books={this.props.books} />
+      <Home
+        showFeatured={!!this.props.location.query.showFeatured}
+        books={this.props.books}
+      />
     );
   }
 }

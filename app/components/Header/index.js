@@ -1,16 +1,27 @@
 import React from 'react';
+import cx from 'classnames';
+import { Link } from 'react-router';
 import Search from '../Search';
 import './Header.scss';
 
-const Header = () => (
+const Header = ({ showFeatured }) => (
   <nav className="nav has-shadow is-fixed">
     <div className="nav-left">
       <a className="header__logo" href="">∞</a>
     </div>
     <div className="nav-center">
-      <a className="nav-item is-tab is-active" href="">My Books</a>
-      <a className="nav-item is-tab" href="">Featured Titles</a>
-      {/* <a className="nav-item is-tab" href="">Search for Books</a> */}
+      <Link
+        className={cx('nav-item is-tab', { 'is-active': !showFeatured })}
+        to="/"
+      >
+        My Books
+      </Link>
+      <Link
+        className={cx('nav-item is-tab', { 'is-active': showFeatured })}
+        to="/?showFeatured=true"
+      >
+        Featured Titles
+      </Link>
     </div>
     <div className="nav-right">
       <div className="nav-item">
