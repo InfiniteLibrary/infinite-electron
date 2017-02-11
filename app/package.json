@@ -1,0 +1,15 @@
+{
+  "name": "electron-react-boilerplate",
+  "productName": "electron-react-boilerplate",
+  "version": "1.0.0",
+  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "main": "./main.js",
+  "author": {
+    "name": "Infinite Library",
+    "email": "email@example.com",
+    "url": "https://github.com/InfiniteLibrary/infinite-electron"
+  },
+  "license": "MIT",
+  "dependencies": {
+  }
+}
