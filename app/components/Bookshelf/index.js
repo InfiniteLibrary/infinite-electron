@@ -3,7 +3,7 @@ import Book from '../Book';
 import './Bookshelf.scss';
 
 const Bookshelf = ({ books }) => (
-  <section className="Bookshelf__listing">
+  <section className="bookshelf__listing">
     {books.map(book => <Book
       key={book.id}
       book={book}

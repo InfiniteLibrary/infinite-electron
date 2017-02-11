@@ -1,15 +1,17 @@
-.Header__container {
-	padding: 80px 50px;
-	border-bottom: 1px solid #ddd;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+@import '../../variables.scss';
+
+nav.is-fixed { position: fixed !important; top: 0; left: 0; right: 0; }
+
+.header {
+  &__logo {
+    font-size: $base-font-size * 3;
+    line-height: 1;
+    margin-bottom: $small-spacing / 4;
+    margin-left: $small-spacing;
+  }
+
+  &__help-link {
+    margin-right: $base-spacing;
+  }
 }
 
-.Header__title {
-	position: absolute;
-	top: 20px;
-	left: 20px;
-	font-weight: 200;
-	font-size: 24px;
-}

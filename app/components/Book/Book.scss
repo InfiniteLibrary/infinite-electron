@@ -1,30 +1,38 @@
-.Book__container {
-	max-width: 180px;
-	padding: 20px;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-}
+@import '../../variables.scss';
 
-.Book__image {
-	border: 1px solid rgba(0, 0, 0, 0.05);
-	box-shadow:
-		inset 0 2px 3px rgba(255, 255, 255, 0.3),
-		inset 0 -2px 3px rgba(0, 0, 0, 0.3),
-		0 1px 1px rgba(255, 255, 255, 0.9);
-}
+.book {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 180px;
+    padding: 20px 20px 0;
+  }
 
-.Book__info {
-	text-overflow: ellipsis;
-	overflow: hidden;
-	white-space: nowrap;
-	padding-top: 5px;
-	display: flex;
-	flex-direction: column;
-	text-align: center;
-}
+  &__image {
+    box-shadow:
+     inset 0 2px 3px rgba(255, 255, 255, 0.3),
+     inset 0 -2px 3px rgba(0, 0, 0, 0.3),
+     0 1px 1px rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
 
-.Book__author {
-	font-size: 10px;
-	color: rgba(0, 0, 0, 0.6);
+  &__info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-top: 5px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__title {
+    font-size: $base-font-size;
+  }
+
+  &__author {
+    color: $medium-gray;
+    font-size: $base-font-size * .85;
+  }
 }
