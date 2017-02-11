@@ -7,17 +7,18 @@ export default class BookDetails extends Component {
     const { title, coverUrl } = this.props.book;
     return (
       <div className="book-details">
+        <div className="book-details__back-link">
         <Link to="/">
-          <i className="fa fa-chevron-left" />
-          Back to Overview
+          <i className="fa fa-close" />
         </Link>
+        </div>
 
         <div className="book-details__cover">
           <img alt={title} src={coverUrl} className="book-details__cover__image" />
         </div>
         <div className="book-details__info">
           <h1 className="book-details__info__title">Moby Dick</h1>
-          <h2 className="book-details__info__author">Herman Melville</h2>
+          <h2 className="book-details__info__author">By Herman Melville</h2>
           <h4 className="book-details__info__meta">Published by Project Gutenberg</h4>
           <p className="book-details__info__description">
             Nulla facilisi. Donec eros erat, molestie et dignissim in, pulvinar
@@ -28,6 +29,7 @@ export default class BookDetails extends Component {
             tincidunt magna.
           </p>
           <p className="book-details__info__subjects"></p>
+          <a className="button" href="">Start Reading</a>
         </div>
       </div>
     );
