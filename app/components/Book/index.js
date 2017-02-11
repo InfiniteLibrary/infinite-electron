@@ -3,17 +3,17 @@ import { Link } from 'react-router';
 import './Book.scss';
 
 const Book = ({ book }) => (
-  <div className="Book__container">
+  <div className="book__container">
     <Link to={`/${book.id}`} >
       <img
-        className="Book__image"
+        className="book__image"
         alt={book.title}
         src={book.cover}
       />
     </Link>
-    <div className="Book__info">
-      <p className="Book__title">{book.title}</p>
-      <p className="Book__author">{book.author}</p>
+    <div className="book__info">
+      <p className="book__title">{book.title}</p>
+      <p className="book__author">{book.author}</p>
     </div>
   </div>
 );

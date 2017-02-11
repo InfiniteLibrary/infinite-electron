@@ -10,10 +10,12 @@ const Header = () => (
     <div className="nav-center">
       <a className="nav-item is-tab is-active" href="">My Books</a>
       <a className="nav-item is-tab" href="">Featured Titles</a>
-      <a className="nav-item is-tab" href="">Search for Books</a>
+      {/* <a className="nav-item is-tab" href="">Search for Books</a> */}
     </div>
     <div className="nav-right">
-      <a className="nav-item header__help-link is-tab" href="">About</a>
+      <div className="nav-item">
+        <Search />
+      </div>
     </div>
   </nav>
 );

@@ -30,6 +30,7 @@ export default class BookDetails extends Component {
           </p>
           <p className="book-details__info__subjects"></p>
           <a className="button" href="">Start Reading</a>
+          <a className="button" href="">Add to My Books</a>
         </div>
       </div>
     );
