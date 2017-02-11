@@ -120,6 +120,7 @@
     "jsdom": "^9.9.1",
     "json-loader": "^0.5.4",
     "minimist": "^1.2.0",
+    "node-sass": "^4.5.0",
     "react-addons-test-utils": "^15.4.2",
     "style-loader": "^0.13.1",
     "tcomb": "^3.2.16",
@@ -131,11 +132,13 @@
     "webpack-validator": "^2.3.0"
   },
   "dependencies": {
+    "bulma": "^0.3.1",
     "electron-debug": "^1.1.0",
     "font-awesome": "^4.7.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router": "^3.0.2",
+    "sass-loader": "^5.0.1",
     "source-map-support": "^0.4.10"
   },
   "devEngines": {
