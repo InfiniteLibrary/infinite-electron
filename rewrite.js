@@ -12,9 +12,14 @@ const findLinks = links => {
   const download = links.find(link => link['opds:acquisition:open-access']);
   const result = {};
   if (image) {
-    result.image = image['opds:image']
+    const imageUrl = image['opds:image']
       .href
       .replace('&zoom=1', '');
+
+    // Make sure this is an actual URL (not local):d
+    if (!imageUrl.startsWith('/')) {
+      result.image = imageUrl;
+    }
   }
 
   if (download) {
@@ -33,8 +38,12 @@ const rewritten = publications.map(publication => {
   const id = Number(idParts[idParts.length - 2]);
   return Object.assign({},
     omit(publication, 'Rating', '_links'),
-    { id },
-    links
+    links,
+    {
+      id,
+      // Randomly select books as own:
+      isOwn: Math.random() > 0.993
+    }
   );
 });
 
