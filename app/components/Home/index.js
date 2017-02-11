@@ -8,7 +8,7 @@ export default class Home extends Component {
     return (
       <div className="main">
         <Header />
-        <Bookshelf books={this.props.books} />
+        <Bookshelf books={this.props.books.slice(0, 50)} />
       </div>
     );
   }
