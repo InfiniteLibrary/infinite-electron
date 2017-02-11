@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import './BookDetails.scss';
 
 export default class BookDetails extends Component {
@@ -6,6 +7,11 @@ export default class BookDetails extends Component {
     const { title, coverUrl } = this.props.book;
     return (
       <div className="book-details">
+        <Link to="/">
+          <i className="fa fa-chevron-left" />
+          Back to Overview
+        </Link>
+
         <div className="book-details__cover">
           <img alt={title} src={coverUrl} className="book-details__cover__image" />
         </div>
