@@ -19,6 +19,10 @@ class Reader extends Component {
     this.setState({ ...this.state, location: item.href });
   }
 
+  handleReady() {
+    this.setState({ ...this.state, isLoading: false });
+  }
+
   tocToggle() {
     let navMenu = document.getElementById('toc-nav');
 
@@ -90,7 +94,7 @@ class Reader extends Component {
           src={`${getStreamHost()}/${book.id}/${download}/`}
           onNavigationReady={ this._navigationReady.bind(this) }
           onLocationChanged={(location) => console.log(location)}
-          onReady={(book) => console.log("ready")}
+          onReady={ this.handleReady.bind(this) }
           location={this.state.location}
         />
       </div>
