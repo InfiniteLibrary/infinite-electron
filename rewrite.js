@@ -5,6 +5,7 @@ Usage:
 Rewrites the data in raw.json to a more usable dump.
 */
 const { publications } = require(`./${process.argv[2]}`);
+const sanitizeHtml = require('sanitize-html');
 const { omit } = require('lodash');
 
 const findLinks = links => {
@@ -44,6 +45,7 @@ const rewritten = publications.map(publication => {
     links,
     {
       id,
+      summary: sanitizeHtml(publication.summary),
       author: publication.contributor.name,
       // Randomly select books as own:
       isOwn: Math.random() > 0.993
