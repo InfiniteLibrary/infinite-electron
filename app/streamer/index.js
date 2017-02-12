@@ -2,6 +2,8 @@ import express from 'express';
 import StreamZip from 'node-stream-zip';
 import path from 'path';
 import portfinder from 'portfinder';
+import fs from 'mz/fs';
+import fetch from 'node-fetch';
 
 class Streamer {
   constructor(repo, port) {
@@ -19,10 +21,9 @@ class Streamer {
     });
 
     this.app.use('/static', express.static(this.staticPath));
-    this.app.get('/:book/:asset(*)', (req, res) => {
-      const bookPath = path.join(this.repo, req.params.book);
-
-      this.open(bookPath)
+    this.app.get('/:book/:url/:asset(*)', (req, res) => {
+      this.resolveEpub(`${req.params.book}.epub`, req.params.url)
+        .then(this.open)
         .then((zip) => this.get(zip, req.params.asset))
         .then((stream) => stream.pipe(res))
         .catch((err) => {
@@ -50,6 +51,28 @@ class Streamer {
     return this.server && this.server.close();
   }
 
+  downloadEpub(destination, url) {
+    return fetch(url)
+      .then(res => {
+        const stream = fs.createWriteStream(destination);
+        res.body.pipe(stream);
+        return new Promise((resolve, reject) => {
+          res.body.on('end', () => resolve(destination));
+          res.body.on('error', err => reject(err));
+        });
+      });
+  }
+
+  resolveEpub(id, url) {
+    const bookPath = path.join(this.repo, id);
+    return fs.access(bookPath, fs.constants.R_OK)
+      .then(
+        () => bookPath,
+        // If the book doesn't exist, download it:
+        () => this.downloadEpub(bookPath, url)
+      );
+  }
+
   open(book) {
     // if (book in this._zips) {
     //   return new Promise((resolve, reject) => {
@@ -57,7 +80,7 @@ class Streamer {
     //   });
     // }
     return new Promise((resolve) => {
-      const zip = new StreamZip({ file: `${book}.epub` });
+      const zip = new StreamZip({ file: book });
       zip.on('error', (err) => { console.error(err); });
       // this._zips[book] = zip;
       resolve(zip);

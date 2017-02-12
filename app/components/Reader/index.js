@@ -6,12 +6,14 @@ import './Reader.scss';
 
 class Reader extends Component {
   render() {
+    const { book } = this.props;
+    const download = encodeURIComponent(book.download);
     return (
       <div className="reader__container">
         <Link to="/">
           <i className="fa fa-chevron-left" />
         </Link>
-        <Epub src={`${getStreamHost()}/pg20154/`} />
+        <Epub src={`${getStreamHost()}/${book.id}/${download}/`} />
       </div>
     );
   }
