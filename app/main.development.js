@@ -1,7 +1,7 @@
-import { app, BrowserWindow, Menu, shell } from 'electron';
-import Streamer from './streamer';
 import fs from 'fs';
 import path from 'path';
+import { app, BrowserWindow, Menu, shell } from 'electron';
+import Streamer from './streamer';
 
 let menu;
 let template;

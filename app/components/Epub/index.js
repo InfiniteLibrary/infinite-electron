@@ -45,29 +45,27 @@ class Epub extends Component {
     });
 
     this.book.ready.then(() => {
-      this.props.onReady && this.props.onReady(this.book)
+      if (this.props.onReady) this.props.onReady(this.book);
     });
 
     this.book.loaded.navigation.then((nav) => {
-      this.props.onNavigationReady && this.props.onNavigationReady(nav.toc)
+      if (this.props.onNavigationReady) this.props.onNavigationReady(nav.toc);
     });
 
-    let keyListener = (e) => {
+    const keyListener = (e) => {
+      // Left Key
+      if ((e.keyCode || e.which) === 37) {
+        this.rendition.prev();
+      }
 
-			// Left Key
-			if ((e.keyCode || e.which) == 37) {
-				this.rendition.prev();
-			}
+      // Right Key
+      if ((e.keyCode || e.which) === 39) {
+        this.rendition.next();
+      }
+    };
 
-			// Right Key
-			if ((e.keyCode || e.which) == 39) {
-				this.rendition.next();
-			}
-
-		};
-
-		this.rendition.on("keyup", keyListener);
-		document.addEventListener("keyup", keyListener, false);
+    this.rendition.on('keyup', keyListener);
+    document.addEventListener('keyup', keyListener, false);
   }
 
   render() {
