@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 import Epub from '../Epub';
 
 class Reader extends Component {
-  componentWillMount() {
-
-  }
-
   render() {
     return (
-      <Epub ref="epub" src={`http://localhost:3300/alice/`} />
+      <div>
+        <Link to="/">
+          <i className="fa fa-chevron-left" />
+        </Link>
+        <Epub src="http://localhost:3300/alice/" />
+      </div>
     );
   }
 }

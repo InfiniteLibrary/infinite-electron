@@ -8,14 +8,14 @@ export default class BookDetails extends Component {
     console.log(this.props.book);
 
     const bookSummary = {
-      __html: book.summary || 'No Description Available.'};
+      __html: book.summary || 'No Description Available.' };
 
     return (
       <div className="book-details">
         <div className="book-details__back-link">
-        <Link to="/">
-          <i className="fa fa-close" />
-        </Link>
+          <Link to="/">
+            <i className="fa fa-close" />
+          </Link>
         </div>
 
         <div className="book-details__cover">
@@ -24,13 +24,13 @@ export default class BookDetails extends Component {
         <div className="book-details__info">
           <h1 className="book-details__info__title">{book.title}</h1>
           <h2 className="book-details__info__author">by {book.author.name || book.author}</h2>
-          <h4 className="book-details__info__meta"></h4>
+          <h4 className="book-details__info__meta" />
           <p dangerouslySetInnerHTML={bookSummary} className="book-details__info__description" />
           {
             book.category.length > 0 &&
-           <p className="book-details__info__subjects">
-             {book.category.join(', ')}
-           </p>
+            <p className="book-details__info__subjects">
+              {book.category.join(', ')}
+            </p>
           }
           <div className="book-details__info__buttons">
             <Link className="button" to={`/read/${book.id}`}>Start Reading</Link>

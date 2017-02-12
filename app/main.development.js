@@ -46,11 +46,11 @@ const installExtensions = async () => {
 app.on('ready', async () => {
   await installExtensions();
 
-  const booksRepo = path.join(app.getPath("userData"), 'books');
+  const booksRepo = path.join(app.getPath('userData'), 'books');
 
   try {
     fs.mkdirSync(booksRepo);
-  } catch(e) {
+  } catch (e) {
     // exists, continue
   }
 

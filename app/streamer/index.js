@@ -3,7 +3,7 @@ import StreamZip from 'node-stream-zip';
 import path from 'path';
 import portfinder from 'portfinder';
 
-const CONTAINER_PATH = "META-INF/container.xml";
+const CONTAINER_PATH = 'META-INF/container.xml';
 
 class Streamer {
   constructor(repo, port) {
@@ -15,7 +15,7 @@ class Streamer {
   }
 
   start() {
-    this.app.get('/', function(req, res){
+    this.app.get('/', (req, res) => {
       res.send('∞');
     });
 
@@ -23,24 +23,21 @@ class Streamer {
       const bookPath = path.join(this.repo, req.params.book);
 
       this.open(bookPath)
-        .then((zip) => {
-          return this.get(zip, req.params.asset);
-        })
+        .then((zip) => this.get(zip, req.params.asset))
         .then((stream) => stream.pipe(res))
         .catch((err) => {
           console.error(err);
-          res.statusMessage = "File not found";
+          res.statusMessage = 'File not found';
           res.status(400).end();
-        })
-
-    })
+        });
+    });
 
     // this.app.use('/books', express.static(`${this.repo}`))
 
     portfinder.basePort = 3300;
     portfinder.getPort((err, openPort) => {
       if (err) throw err;
-      let port = openPort;
+      const port = openPort;
       this.server = this.app.listen(port, serverError => {
         if (serverError) {
           return console.error(serverError);
@@ -48,8 +45,6 @@ class Streamer {
         console.log(`Serving ${this.repo} at http://localhost:${port}`);
       });
     });
-
-
   }
 
   stop() {
@@ -63,8 +58,8 @@ class Streamer {
     //   });
     // }
     return new Promise((resolve, reject) => {
-      var zip = new StreamZip({file: `${book}.epub` });
-      zip.on('error', (err) => { console.error(err) });
+      const zip = new StreamZip({ file: `${book}.epub` });
+      zip.on('error', (err) => { console.error(err); });
       // this._zips[book] = zip;
       resolve(zip);
     });
@@ -73,8 +68,7 @@ class Streamer {
   get(zip, asset) {
     let found = false;
     return new Promise((resolve, reject) => {
-
-      let handleResult = (asset) => {
+      const handleResult = (asset) => {
         zip.stream(asset, (err, stream) => {
           if (err) {
             reject(err);
@@ -86,22 +80,19 @@ class Streamer {
       };
 
       zip.on('ready', () => {
-        var entry = zip.entry(asset);
+        const entry = zip.entry(asset);
 
         if (entry === undefined) {
           reject();
         } else if (!found) {
           handleResult(asset);
         }
-
       });
 
       zip.on('entry', (entry) => {
-
         if (entry.name === asset) {
           handleResult(asset);
         }
-
       });
     });
   }
