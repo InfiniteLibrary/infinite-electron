@@ -17,7 +17,11 @@ class Streamer {
     this.port = port;
     this.server = undefined;
     this._zips = {};
-    this.staticPath = path.resolve(__dirname, '..', 'static');
+    if (process.env.NODE_ENV === 'development') {
+      this.staticPath = path.resolve(__dirname, '..', 'static');
+    } else {
+      this.staticPath = path.resolve(process.resourcesPath, 'app.asar', 'static');
+    }
   }
 
   start() {

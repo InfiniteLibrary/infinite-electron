@@ -13,6 +13,10 @@ export default validate({
       loader: 'style!css'
     },
     {
+      test: /\.scss$/,
+      loader: 'style!css!sass'
+    },
+    {
       test: /\.jsx?$/,
       loaders: ['babel-loader'],
       exclude: /node_modules/

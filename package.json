@@ -23,8 +23,8 @@
   },
   "browserslist": "electron 1.4",
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "Infinity Library Reader",
+    "appId": "org.infinity.reader",
     "category": "public.app-category.tools",
     "dmg": {
       "contents": [
@@ -44,10 +44,13 @@
     "files": [
       "dist/",
       "node_modules/",
+      "static/",
       "app.html",
       "main.js",
       "main.js.map",
-      "package.json"
+      "books.json",
+      "package.json",
+      "*.png"
     ],
     "win": {
       "target": "nsis"
