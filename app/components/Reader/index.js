@@ -9,7 +9,7 @@ class Reader extends Component {
         <Link to="/">
           <i className="fa fa-chevron-left" />
         </Link>
-        <Epub src="http://localhost:3300/alice/" />
+        <Epub src="http://localhost:3300/pg20154/" />
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ePub, { Rendition, Layout } from 'epubjs';
+import './Epub.scss';
 
 class Epub extends Component {
 
@@ -24,7 +25,7 @@ class Epub extends Component {
       flow: this.props.flow || 'paginated',
       minSpreadWidth: 550,
       width: '100%',
-      height: 800,
+      height: '100%',
       manager: ePub.ViewManagers.default,
       view: ePub.Views.iframe
     });
@@ -46,13 +47,30 @@ class Epub extends Component {
     this.book.loaded.navigation.then((nav) => {
       this.props.onNavigationReady && this.props.onNavigationReady(nav.toc)
     });
+
+    let keyListener = (e) => {
+
+			// Left Key
+			if ((e.keyCode || e.which) == 37) {
+				this.rendition.prev();
+			}
+
+			// Right Key
+			if ((e.keyCode || e.which) == 39) {
+				this.rendition.next();
+			}
+
+		};
+
+		this.rendition.on("keyup", keyListener);
+		document.addEventListener("keyup", keyListener, false);
   }
 
   render() {
     return (
       <div>
         <button onClick={() => this.rendition.prev()}>‹</button>
-        <div id="stage" />
+        <div id="stage"/>
         <button onClick={() => this.rendition.next()}>›</button>
       </div>
     );
