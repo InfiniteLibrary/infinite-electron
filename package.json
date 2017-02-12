@@ -136,7 +136,7 @@
     "bulma": "^0.3.1",
     "classnames": "^2.2.5",
     "electron-debug": "^1.1.0",
-    "epubjs": "beta",
+    "epubjs": "0.3.12",
     "font-awesome": "^4.7.0",
     "lunr": "^0.7.2",
     "mkdirp": "^0.5.1",
