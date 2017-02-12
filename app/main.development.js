@@ -1,4 +1,7 @@
 import { app, BrowserWindow, Menu, shell } from 'electron';
+import Streamer from './streamer';
+import fs from 'fs';
+import path from 'path';
 
 let menu;
 let template;
@@ -44,6 +47,16 @@ const installExtensions = async () => {
 app.on('ready', async () => {
   await installExtensions();
 
+  const booksRepo = path.join(app.getPath("userData"), 'books');
+
+  try {
+    fs.mkdirSync(booksRepo);
+  } catch(e) {
+    // exists, continue
+  }
+
+  const streamer = new Streamer(booksRepo);
+
   mainWindow = new BrowserWindow({
     show: false,
     width: 1024,
@@ -55,10 +68,12 @@ app.on('ready', async () => {
   mainWindow.webContents.on('did-finish-load', () => {
     mainWindow.show();
     mainWindow.focus();
+    streamer.start();
   });
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+    streamer.stop();
   });
 
   if (process.env.NODE_ENV === 'development') {
