@@ -24,7 +24,6 @@ export default class BookDetails extends Component {
         <div className="book-details__info">
           <h1 className="book-details__info__title">{book.title}</h1>
           <h2 className="book-details__info__author">by {book.author.name || book.author}</h2>
-          <h4 className="book-details__info__meta" />
           <p dangerouslySetInnerHTML={bookSummary} className="book-details__info__description" />
           {
             book.category.length > 0 &&

@@ -3,8 +3,6 @@ import StreamZip from 'node-stream-zip';
 import path from 'path';
 import portfinder from 'portfinder';
 
-const CONTAINER_PATH = 'META-INF/container.xml';
-
 class Streamer {
   constructor(repo, port) {
     this.app = express();
@@ -58,7 +56,7 @@ class Streamer {
     //     resolve(this._zips[book]);
     //   });
     // }
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       const zip = new StreamZip({ file: `${book}.epub` });
       zip.on('error', (err) => { console.error(err); });
       // this._zips[book] = zip;
@@ -69,8 +67,8 @@ class Streamer {
   get(zip, asset) {
     let found = false;
     return new Promise((resolve, reject) => {
-      const handleResult = (asset) => {
-        zip.stream(asset, (err, stream) => {
+      const handleResult = (resultAsset) => {
+        zip.stream(resultAsset, (err, stream) => {
           if (err) {
             reject(err);
             return console.error(err);
