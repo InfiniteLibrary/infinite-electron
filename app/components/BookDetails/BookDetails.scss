@@ -1,0 +1,76 @@
+@import "../../variables.scss";
+
+$book-details-background-color: $dark-gray;
+$book-details-text-color: #fff;
+
+.book-details {
+  background-color: $book-details-background-color;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+
+  &__back-link {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+
+    a {
+      color: transparentize($book-details-text-color, .5);
+      &:hover { color: $book-details-text-color; }
+    }
+
+    i { font-size: 2.5rem; }
+  }
+
+  &__cover {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: $base-spacing;
+    margin-right: $base-spacing;
+    padding-bottom: $base-spacing * 2;
+    padding-top: $base-spacing * 2;
+
+    &__image {
+      max-height: 100vh;
+    }
+  }
+
+  &__info {
+    color: $book-details-text-color;
+    flex: 1;
+    margin-bottom: $base-spacing;
+    margin-left: $base-spacing;
+    margin-right: $base-spacing * 2;
+    margin-top: $base-spacing * 2;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &__title {
+      margin-bottom: $small-spacing / 2;
+      font-size: $base-font-size * 2.5;
+      line-height: 1.25;
+    }
+
+    &__author {
+      font-size: $base-font-size * 1.25;
+    }
+
+    &__meta {
+      color: transparentize($book-details-text-color, .7);
+    }
+
+    &__description {
+      margin-bottom: $base-spacing;
+      margin-top: $base-spacing;
+    }
+
+    &__buttons {
+      margin-top: $base-spacing;
+
+      a.button { margin-right: $small-spacing !important; }
+    }
+  }
+}

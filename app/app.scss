@@ -1,0 +1,7 @@
+$family-primary: 'Helvetica Neue', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
+$super-color: #ffca29;
+@import '~bulma/bulma.sass';
+
+.input {
+  border-radius: 0;
+}

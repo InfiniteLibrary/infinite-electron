@@ -1,0 +1,17 @@
+@import '../../variables.scss';
+
+nav.is-fixed { position: fixed !important; top: 0; left: 0; right: 0; }
+
+.header {
+  &__logo {
+    font-size: $base-font-size * 3;
+    line-height: 1;
+    margin-bottom: $small-spacing / 4;
+    margin-left: $small-spacing;
+  }
+
+  &__help-link {
+    margin-right: $base-spacing;
+  }
+}
+

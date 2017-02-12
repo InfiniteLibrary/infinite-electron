@@ -29,8 +29,7 @@ const installExtensions = async () => {
     const installer = require('electron-devtools-installer'); // eslint-disable-line global-require
 
     const extensions = [
-      'REACT_DEVELOPER_TOOLS',
-      'REDUX_DEVTOOLS'
+      'REACT_DEVELOPER_TOOLS'
     ];
 
     const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
@@ -59,8 +58,8 @@ app.on('ready', async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728
+    width: 1400,
+    height: 800
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
