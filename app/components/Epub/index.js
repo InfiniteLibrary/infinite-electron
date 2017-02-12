@@ -73,17 +73,11 @@ class Epub extends Component {
   render() {
     return (
       <div className="epub__container">
-        <button
-          className="epub__container__button"
-          onClick={() => this.rendition.prev()}
-        >
+        <button className="epub__container__page-left" onClick={() => this.rendition.prev()} >
           <i className="fa fa-chevron-left" />
         </button>
         <div id="stage" />
-        <button
-          className="epub__container__button"
-          onClick={() => this.rendition.next()}
-        >
+        <button className="epub__container__page-right" onClick={() => this.rendition.next()} >
           <i className="fa fa-chevron-right" />
         </button>
       </div>

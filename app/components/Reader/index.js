@@ -8,9 +8,27 @@ class Reader extends Component {
   render() {
     return (
       <div className="reader__container">
-        <Link to="/">
-          <i className="fa fa-chevron-left" />
-        </Link>
+        <nav className="nav is-fixed">
+          <div className="nav-left">
+            <Link to="/" className="nav-item">
+              <span className="icon">
+                <i className="fa fa-chevron-left" />
+              </span>
+            </Link>
+          </div>
+          <div className="nav-center">
+            <div className="nav-item">
+              { this.props.book.title }
+            </div>
+          </div>
+          <div className="nav-right">
+            <div className="nav-item">
+              <span className="icon">
+                <i className="fa fa-navicon" />
+              </span>
+            </div>
+          </div>
+        </nav>
         <Epub src={`${getStreamHost()}/pg20154/`} />
       </div>
     );
