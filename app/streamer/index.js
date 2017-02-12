@@ -4,6 +4,8 @@ import path from 'path';
 import portfinder from 'portfinder';
 import fs from 'mz/fs';
 import fetch from 'node-fetch';
+import mime from 'mime';
+import Url from 'url';
 
 class Streamer {
   constructor(repo, port) {
@@ -25,7 +27,13 @@ class Streamer {
       this.resolveEpub(`${req.params.book}.epub`, req.params.url)
         .then(this.open)
         .then((zip) => this.get(zip, req.params.asset))
-        .then((stream) => stream.pipe(res))
+        .then((stream) => {
+          let asset = req.params.asset;
+          let path = Url.parse(asset).pathname || '';
+          let mimeType = mime.lookup(path);
+          res.contentType(mimeType);
+          stream.pipe(res)
+        })
         .catch((err) => {
           console.error(err);
           res.statusMessage = 'File not found';
