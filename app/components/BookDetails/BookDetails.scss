@@ -41,12 +41,17 @@ $book-details-text-color: #fff;
   &__info {
     color: $book-details-text-color;
     flex: 1;
+    margin-bottom: $base-spacing;
     margin-left: $base-spacing;
     margin-right: $base-spacing * 2;
     margin-top: $base-spacing * 2;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 
     &__title {
-      font-size: $base-font-size * 3;
+      margin-bottom: $small-spacing / 2;
+      font-size: $base-font-size * 2.5;
+      line-height: 1.25;
     }
 
     &__author {
@@ -60,6 +65,12 @@ $book-details-text-color: #fff;
     &__description {
       margin-bottom: $base-spacing;
       margin-top: $base-spacing;
+    }
+
+    &__buttons {
+      margin-top: $base-spacing;
+
+      a.button { margin-right: $small-spacing !important; }
     }
   }
 }
