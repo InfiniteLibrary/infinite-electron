@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import Loader from '../Loader';
 import Epub from '../Epub';
 import getStreamHost from '../../utils/get-stream-host';
 import './Reader.scss';
 
 class Reader extends Component {
+  constructor(props) {
+    super(props);
+    this.handleReady = this.handleReady.bind(this);
+  }
+
+  state = {
+    isLoading: true
+  };
+
+  handleReady() {
+    this.setState({ isLoading: false });
+  }
+
   render() {
     const { book } = this.props;
     const download = encodeURIComponent(book.download);
@@ -31,7 +45,11 @@ class Reader extends Component {
             </div>
           </div>
         </nav>
-        <Epub src={`${getStreamHost()}/${book.id}/${download}/`} />
+        {this.state.isLoading && <Loader />}
+        <Epub
+          onReady={this.handleReady}
+          src={`${getStreamHost()}/${book.id}/${download}/`}
+        />
       </div>
     );
   }
