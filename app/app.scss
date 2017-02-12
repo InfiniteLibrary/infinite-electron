@@ -1,5 +1,8 @@
 $family-primary: 'Helvetica Neue', 'Lucida Grande', 'Segoe UI', Ubuntu, Cantarell, sans-serif;
 $super-color: #ffca29;
+$link-color: #00d1b2;
+$link-hover: darken($link-color, 0.5);
+
 @import '~bulma/bulma.sass';
 
 .input {

@@ -11,6 +11,7 @@ The InfiniteLibrary team has grown out of two [Codex Hackathons](http://codexhac
 If you don't have yarn, see https://yarnpkg.com/en/docs/install.
 
 ```bash
+$ cd [infinite-electron path]
 $ yarn
 ```
 

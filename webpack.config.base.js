@@ -9,6 +9,10 @@ import { dependencies as externals } from './app/package.json';
 export default validate({
   module: {
     loaders: [{
+      test: /\.css$/,
+      loader: 'style!css'
+    },
+    {
       test: /\.jsx?$/,
       loaders: ['babel-loader'],
       exclude: /node_modules/
