@@ -44,6 +44,10 @@ class Epub extends Component {
       }
     });
 
+    this.book.loaded.navigation.then((nav) => {
+      if (this.props.onNavigationReady) this.props.onNavigationReady(nav.toc);
+    });
+
     this.keyListener = (e) => {
       // Left Key
       if ((e.keyCode || e.which) === 37) {
@@ -70,6 +74,24 @@ class Epub extends Component {
   componentWillUnmount() {
     this.rendition.off('keyup', this.keyListener);
     document.removeEventListener('keyup', this.keyListener, false);
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      this.rendition.display(nextProps.location);
+    }
+
+    if (nextProps.theme !== this.props.theme) {
+      this.rendition.themes.apply(nextProps.theme);
+    }
+
+    if (nextProps.fontSize !== this.props.fontSize) {
+      this.rendition.themes.fontSize(nextProps.fontSize);
+    }
+  }
+
+  display(what) {
+    this.rendition && this.rendition.display(what);
   }
 
   render() {
