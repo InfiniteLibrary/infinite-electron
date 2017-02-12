@@ -33,7 +33,7 @@ export default class BookDetails extends Component {
            </p>
           }
           <div className="book-details__info__buttons">
-            <a className="button" href="">Start Reading</a>
+            <Link className="button" to={`/read/${book.id}`}>Start Reading</Link>
             <a className="button" href="">Add to My Books</a>
           </div>
         </div>
