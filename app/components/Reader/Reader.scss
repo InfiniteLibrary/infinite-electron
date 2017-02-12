@@ -4,6 +4,7 @@ $toc-menu-width: 300px;
 
 .reader__container {
   background-color: #fcfcfc;
+  padding: 25px;
 }
 
 .reader__controls {
@@ -18,12 +19,10 @@ $toc-menu-width: 300px;
 .reader__toc {
   background-color: $dark-gray;
   color: #fff;
-  display: flex;
-  flex-direction: column;
   height: 100vh;
-  justify-content: center;
   -webkit-overflow-scrolling: touch;
   overflow-y: auto;
+  padding: $base-spacing $small-spacing;
   position: fixed;
   top: 0;
   left: 0;
@@ -35,4 +34,9 @@ $toc-menu-width: 300px;
   z-index: 600;
 
   &.is-visible { transform: translateX(0%); }
+
+  &__item {
+    a {}
+    a:hover { color: #fff; }
+  }
 }

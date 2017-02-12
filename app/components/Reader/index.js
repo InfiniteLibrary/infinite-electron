@@ -37,17 +37,23 @@ class Reader extends Component {
     return (
       <div className="reader__container">
         <div id="toc-nav" className="reader__toc">
-          <div>
+          <ul>
+            <h2>Table of Contents</h2>
             {
               this.state.nav.map((item, index) =>
-                <a key={`navitem_${index}`}
-                   className="nav-item"
-                   onClick={() => { this._onNavClick(item) }}>
-                  {item.label}
-                </a>
+                <li>
+                  <a key={`navitem_${index}`}
+                     className="reader__toc__item"
+                     onClick={() => {
+                         this._onNavClick(item)
+                         this.tocToggle()
+                       }}>
+                    {item.label}
+                  </a>
+                </li>
               )
             }
-          </div>
+          </ul>
         </div>
         <nav className="nav is-fixed">
           <div className="nav-left">
