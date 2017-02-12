@@ -1,7 +1,7 @@
-import { app, BrowserWindow, Menu, shell } from 'electron';
-import Streamer from './streamer';
 import fs from 'fs';
 import path from 'path';
+import { app, BrowserWindow, Menu, shell } from 'electron';
+import Streamer from './streamer';
 
 let menu;
 let template;
@@ -46,11 +46,11 @@ const installExtensions = async () => {
 app.on('ready', async () => {
   await installExtensions();
 
-  const booksRepo = path.join(app.getPath("userData"), 'books');
+  const booksRepo = path.join(app.getPath('userData'), 'books');
 
   try {
     fs.mkdirSync(booksRepo);
-  } catch(e) {
+  } catch (e) {
     // exists, continue
   }
 

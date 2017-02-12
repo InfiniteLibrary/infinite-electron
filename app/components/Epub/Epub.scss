@@ -1,0 +1,45 @@
+@import "../../variables.scss";
+
+.epub__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  &__page-left,
+  &__page-right {
+    background-color: $action-color;
+    border: none;
+    height: 100vh;
+    opacity: 0;
+    position: absolute;
+    text-align: center;
+    width: 5vw;
+    z-index: 400;
+
+    &:focus { outline: none; }
+
+    &:hover {
+      cursor: pointer;
+      color: rgba(0, 0, 0, 0.85);
+      opacity: 0.5;
+    }
+  }
+
+  &__page-left {
+    left: 0;
+  }
+
+  &__page-right {
+    right: 0;
+  }
+}
+
+#stage {
+  padding: 50px;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+}
