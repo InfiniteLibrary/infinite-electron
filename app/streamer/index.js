@@ -2,10 +2,13 @@ import express from 'express';
 import StreamZip from 'node-stream-zip';
 import path from 'path';
 import portfinder from 'portfinder';
-import fs from 'mz/fs';
+import fs from 'fs';
+import pify from 'pify';
 import fetch from 'node-fetch';
 import mime from 'mime';
 import Url from 'url';
+
+const access = pify(fs.access);
 
 class Streamer {
   constructor(repo, port) {
@@ -73,7 +76,7 @@ class Streamer {
 
   resolveEpub(id, url) {
     const bookPath = path.join(this.repo, id);
-    return fs.access(bookPath, fs.constants.R_OK)
+    return access(bookPath, fs.constants.R_OK)
       .then(
         () => bookPath,
         // If the book doesn't exist, download it:
