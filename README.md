@@ -1,5 +1,11 @@
 # infinite-electron
-An Electron based reader for Project Gutenberg books.
+An [Electron](http://electron.atom.io/)-based cross-platform desktop reader for free ebooks (EPUB) from Project Gutenberg and [Unglue.it](https://unglue.it). 
+The InfiniteLibrary team has grown out of two [Codex Hackathons](http://codexhackathon.com/).
+
+## Stretch goals
+
+- Add your own DRM-free ebooks.
+- Make print copies
 
 ## Installation
 If you don't have yarn, see https://yarnpkg.com/en/docs/install.
