@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, findDOMNode } from 'react';
 import ePub from 'epubjs';
 import getStreamHost from '../../utils/get-stream-host';
 import './Epub.scss';
@@ -22,6 +22,33 @@ class Epub extends Component {
   }
 
   componentDidMount() {
+    this._start();
+  }
+
+
+  componentWillUnmount() {
+    this._stop();
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      this.rendition.display(nextProps.location);
+    }
+
+    if (nextProps.theme !== this.props.theme) {
+      this.rendition.themes.apply(nextProps.theme);
+    }
+
+    if (nextProps.fontSize !== this.props.fontSize) {
+      this.rendition.themes.fontSize(nextProps.fontSize);
+    }
+  }
+
+  display(what) {
+    this.rendition && this.rendition.display(what);
+  }
+
+  _start() {
     this.rendition = this.book.renderTo('stage', {
       flow: this.props.flow || 'paginated',
       minSpreadWidth: 550,
@@ -70,29 +97,20 @@ class Epub extends Component {
 
     this.rendition.on('keyup', this.keyListener);
     document.addEventListener('keyup', this.keyListener, false);
+
+    window.addEventListener('resize', this._onResize.bind(this), false);
   }
 
-  componentWillUnmount() {
+  _stop(){
+    this.rendition.destroy();
     this.rendition.off('keyup', this.keyListener);
     document.removeEventListener('keyup', this.keyListener, false);
+    window.removeEventListener('resize', this._onResize, false);
   }
-
-  componentWillUpdate(nextProps) {
-    if (nextProps.location !== this.props.location) {
-      this.rendition.display(nextProps.location);
-    }
-
-    if (nextProps.theme !== this.props.theme) {
-      this.rendition.themes.apply(nextProps.theme);
-    }
-
-    if (nextProps.fontSize !== this.props.fontSize) {
-      this.rendition.themes.fontSize(nextProps.fontSize);
-    }
-  }
-
-  display(what) {
-    this.rendition && this.rendition.display(what);
+  _onResize() {
+    this._stop();
+    clearTimeout(this.resizeTimeout);
+    this.resizeTimeout = setTimeout(this._start.bind(this), 250 );
   }
 
   render() {
