@@ -8,6 +8,15 @@
 		background: none;
 		border: none;
 
+		&:focus {
+			outline: none;
+		}
+
+		&:hover {
+			cursor: pointer;
+			color: rgba(0, 0, 0, 0.85);
+		}
+
 		> i {
 			font-size: 50px;
 		}
