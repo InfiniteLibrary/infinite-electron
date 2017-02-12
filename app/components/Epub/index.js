@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ePub, { Rendition, Layout } from 'epubjs';
+import './Epub.scss';
 
 class Epub extends Component {
 
@@ -23,7 +24,7 @@ class Epub extends Component {
     this.rendition = this.book.renderTo('stage', {
       flow: this.props.flow || 'paginated',
       minSpreadWidth: 550,
-      width: '100%',
+      width: 1000,
       height: 800,
       manager: ePub.ViewManagers.default,
       view: ePub.Views.iframe
@@ -50,10 +51,20 @@ class Epub extends Component {
 
   render() {
     return (
-      <div>
-        <button onClick={() => this.rendition.prev()}>‹</button>
+      <div className="epub__container">
+        <button
+          className="epub__container__button"
+          onClick={() => this.rendition.prev()}
+        >
+          <i className="fa fa-chevron-left" />
+        </button>
         <div id="stage" />
-        <button onClick={() => this.rendition.next()}>›</button>
+        <button
+          className="epub__container__button"
+          onClick={() => this.rendition.next()}
+        >
+          <i className="fa fa-chevron-right" />
+        </button>
       </div>
     );
   }

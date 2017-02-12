@@ -1,0 +1,19 @@
+.epub__container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	&__button {
+		background: none;
+		border: none;
+
+		> i {
+			font-size: 50px;
+		}
+	}
+}
+
+#stage {
+	padding: 50px;
+}
