@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import BookDetails from '../components/BookDetails';
+import findBook from '../utils/find-book';
 
 export default class BookDetailsPage extends Component {
   render() {
-    const selected = this.props.books.find(book => book.id === Number(this.props.params.bookId));
+    const selected = findBook(this.props.books, this.props.params.bookId);
     return (
       <BookDetails book={selected} />
     );
