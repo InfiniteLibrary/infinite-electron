@@ -6,6 +6,8 @@ import './Reader.scss';
 
 class Reader extends Component {
   render() {
+    const { book } = this.props;
+    const download = encodeURIComponent(book.download);
     return (
       <div className="reader__container">
         <nav className="nav is-fixed">
@@ -29,7 +31,7 @@ class Reader extends Component {
             </div>
           </div>
         </nav>
-        <Epub src={`${getStreamHost()}/pg20154/`} />
+        <Epub src={`${getStreamHost()}/${book.id}/${download}/`} />
       </div>
     );
   }
