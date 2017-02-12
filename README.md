@@ -1,6 +1,8 @@
 # infinite-electron
-An [Electron](http://electron.atom.io/)-based cross-platform desktop reader for free ebooks (EPUB) from Project Gutenberg and [Unglue.it](https://unglue.it). 
+An [Electron](http://electron.atom.io/)-based cross-platform desktop reader for free ebooks (EPUB) from Project Gutenberg and [Unglue.it](https://unglue.it).
 The InfiniteLibrary team has grown out of two [Codex Hackathons](http://codexhackathon.com/).
+
+![Infinite Reader](http://i.imgur.com/iLMH42N.jpg)
 
 ## Stretch goals
 
