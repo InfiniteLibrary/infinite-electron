@@ -35,22 +35,24 @@ const findLinks = links => {
   return result;
 };
 
-const rewritten = publications.map(publication => {
-  const links = findLinks(publication._links);
-  // id is a url, and the actual number is the last part of it:
-  const idParts = publication.id.split('/');
-  const id = Number(idParts[idParts.length - 2]);
-  return Object.assign({},
-    omit(publication, 'Rating', '_links', 'contributor'),
-    links,
-    {
-      id,
-      summary: sanitizeHtml(publication.summary),
-      author: publication.contributor.name,
-      // Randomly select books as own:
-      isOwn: Math.random() > 0.993
-    }
-  );
-});
+const rewritten = publications
+  .map(publication => {
+    const links = findLinks(publication._links);
+    // id is a url, and the actual number is the last part of it:
+    const idParts = publication.id.split('/');
+    const id = Number(idParts[idParts.length - 2]);
+    return Object.assign({},
+      omit(publication, 'Rating', '_links', 'contributor'),
+      links,
+      {
+        id,
+        summary: sanitizeHtml(publication.summary),
+        author: publication.contributor.name,
+        // Randomly select books as own:
+        isOwn: Math.random() > 0.993
+      }
+    );
+  })
+  .filter(publication => publication.download);
 
 process.stdout.write(JSON.stringify(rewritten));
