@@ -56,7 +56,7 @@ class Epub extends Component {
       if (this.props.onNavigationReady) this.props.onNavigationReady(nav.toc);
     });
 
-    const keyListener = (e) => {
+    this.keyListener = (e) => {
       // Left Key
       if ((e.keyCode || e.which) === 37) {
         this.rendition.prev();
@@ -68,8 +68,13 @@ class Epub extends Component {
       }
     };
 
-    this.rendition.on('keyup', keyListener);
-    document.addEventListener('keyup', keyListener, false);
+    this.rendition.on('keyup', this.keyListener);
+    document.addEventListener('keyup', this.keyListener, false);
+  }
+
+  componentWillUnmount() {
+    this.rendition.off('keyup', this.keyListener);
+    document.removeEventListener('keyup', this.keyListener, false);
   }
 
   componentWillUpdate(nextProps) {
