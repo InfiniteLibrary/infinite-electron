@@ -52,7 +52,11 @@ class Epub extends Component {
 
   render() {
     return (
-      <div id="stage"></div>
+      <div>
+        <button onClick={() => this.rendition.prev() }>‹</button>
+        <div id="stage"></div>
+        <button onClick={() => this.rendition.next() }>›</button>
+      </div>
     );
   }
 }

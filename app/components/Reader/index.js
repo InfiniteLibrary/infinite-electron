@@ -8,7 +8,7 @@ class Reader extends Component {
 
   render() {
     return (
-      <Epub src={`http://localhost:3300/alice/`} />
+      <Epub ref="epub" src={`http://localhost:3300/alice/`} />
     );
   }
 }
