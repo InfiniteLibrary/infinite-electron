@@ -5,9 +5,9 @@ import React, { Component } from 'react';
 
 let booksPath;
 if (process.env.NODE_ENV === 'development') {
-  booksPath = path.resolve('resources', 'books.json');
+  booksPath = path.resolve('app', 'books.json');
 } else {
-  booksPath = path.resolve(process.resourcesPath, 'books.json');
+  booksPath = path.resolve(process.resourcesPath, 'app.asar', 'books.json');
 }
 
 export default class App extends Component {
