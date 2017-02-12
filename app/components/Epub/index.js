@@ -44,14 +44,6 @@ class Epub extends Component {
       }
     });
 
-    this.book.ready.then(() => {
-      if (this.props.onReady) this.props.onReady(this.book);
-    });
-
-    this.book.loaded.navigation.then((nav) => {
-      if (this.props.onNavigationReady) this.props.onNavigationReady(nav.toc);
-    });
-
     this.keyListener = (e) => {
       // Left Key
       if ((e.keyCode || e.which) === 37) {
@@ -64,8 +56,15 @@ class Epub extends Component {
       }
     };
 
-    this.rendition.on('keyup', this.keyListener);
-    document.addEventListener('keyup', this.keyListener, false);
+    this.book.ready.then(() => {
+      if (this.props.onReady) this.props.onReady(this.book);
+      this.rendition.on('keyup', this.keyListener);
+      document.addEventListener('keyup', this.keyListener, false);
+    });
+
+    this.book.loaded.navigation.then((nav) => {
+      if (this.props.onNavigationReady) this.props.onNavigationReady(nav.toc);
+    });
   }
 
   componentWillUnmount() {
