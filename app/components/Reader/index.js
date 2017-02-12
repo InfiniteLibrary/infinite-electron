@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
+import Loader from '../Loader';
 import Epub from '../Epub';
 import getStreamHost from '../../utils/get-stream-host';
 import './Reader.scss';
@@ -7,18 +8,15 @@ import './Reader.scss';
 class Reader extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      "nav": [],
-      "location" : 0
-    };
+    this.handleReady = this.handleReady.bind(this);
   }
 
   _navigationReady(nav) {
-    this.setState({ nav });
+    this.setState({ ...this.state, nav });
   }
 
   _onNavClick(item) {
-    this.setState({location : item.href })
+    this.setState({ ...this.state, location: item.href });
   }
 
   tocToggle() {
@@ -29,6 +27,17 @@ class Reader extends Component {
     } else {
       navMenu.classList.add('is-visible');
     }
+
+  }
+
+  state = {
+    isLoading: true,
+    nav: [],
+    location : 0
+  };
+
+  handleReady() {
+    this.setState({ ...this.state, isLoading: false });
   }
 
   render() {
@@ -76,6 +85,7 @@ class Reader extends Component {
             </a>
           </div>
         </nav>
+        {this.state.isLoading && <Loader />}
         <Epub
           src={`${getStreamHost()}/${book.id}/${download}/`}
           onNavigationReady={ this._navigationReady.bind(this) }

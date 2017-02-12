@@ -1,0 +1,17 @@
+.loader__container {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	right: 50%;
+	bottom: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px;
+	text-align: center;
+	flex-direction: column;
+
+	> div {
+		padding: 20px 0;
+	}
+}
