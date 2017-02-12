@@ -5,8 +5,8 @@ export default class HomePage extends Component {
   render() {
     return (
       <Home
+        {...this.props}
         showFeatured={!!this.props.location.query.showFeatured}
-        books={this.props.books}
       />
     );
   }

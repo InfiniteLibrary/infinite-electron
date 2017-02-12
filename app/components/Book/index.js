@@ -14,7 +14,7 @@ const Book = ({ book }) => (
     </Link>
     <div className="book__info">
       <p className="book__title">{book.title}</p>
-      <p className="book__author">{book.author.name}</p>
+      <p className="book__author">{book.author}</p>
     </div>
   </div>
 );

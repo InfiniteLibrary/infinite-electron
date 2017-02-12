@@ -6,7 +6,9 @@ import './Home.scss';
 export default class Home extends Component {
   render() {
     let books;
-    if (this.props.showFeatured) {
+    if (this.props.isSearching) {
+      books = this.props.searchResults;
+    } else if (this.props.showFeatured) {
       books = this.props.books.slice(0, 50);
     } else {
       books = this.props.books.filter(({ isOwn }) => isOwn);
@@ -14,7 +16,7 @@ export default class Home extends Component {
 
     return (
       <div className="main">
-        <Header showFeatured={this.props.showFeatured} />
+        <Header {...this.props} />
         <Bookshelf books={books} />
       </div>
     );

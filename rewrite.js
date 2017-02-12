@@ -44,7 +44,7 @@ const rewritten = publications.map(publication => {
     links,
     {
       id,
-      author: publication.contributor,
+      author: publication.contributor.name,
       // Randomly select books as own:
       isOwn: Math.random() > 0.993
     }
