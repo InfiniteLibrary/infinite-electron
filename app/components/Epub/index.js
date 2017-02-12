@@ -71,11 +71,6 @@ class Epub extends Component {
     });
   }
 
-  componentWillUnmount() {
-    this.rendition.off('keyup', this.keyListener);
-    document.removeEventListener('keyup', this.keyListener, false);
-  }
-
   componentWillUpdate(nextProps) {
     if (nextProps.location !== this.props.location) {
       this.rendition.display(nextProps.location);
@@ -90,8 +85,15 @@ class Epub extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.rendition.off('keyup', this.keyListener);
+    document.removeEventListener('keyup', this.keyListener, false);
+  }
+
   display(what) {
-    this.rendition && this.rendition.display(what);
+    if (this.rendition) {
+      this.rendition.display(what);
+    }
   }
 
   render() {

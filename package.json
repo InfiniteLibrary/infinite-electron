@@ -6,7 +6,7 @@
   "main": "main.js",
   "scripts": {
     "test": "npm run lint",
-    "lint": "eslint --cache --format=node_modules/eslint-formatter-pretty .",
+    "lint": "eslint --cache --ignore-path .gitignore --format=node_modules/eslint-formatter-pretty .",
     "lint-fix": "npm run lint -- --fix",
     "hot-server": "cross-env NODE_ENV=development node --max_old_space_size=2096 -r babel-register server.js",
     "build-main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.electron.js --progress --profile --colors",

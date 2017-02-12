@@ -35,11 +35,11 @@ class Streamer {
         .then(this.open)
         .then((zip) => this.get(zip, req.params.asset))
         .then((stream) => {
-          let asset = req.params.asset;
-          let path = Url.parse(asset).pathname || '';
-          let mimeType = mime.lookup(path);
+          const asset = req.params.asset;
+          const assetPath = Url.parse(asset).pathname || '';
+          const mimeType = mime.lookup(assetPath);
           res.contentType(mimeType);
-          stream.pipe(res)
+          stream.pipe(res);
         })
         .catch((err) => {
           console.error(err);
