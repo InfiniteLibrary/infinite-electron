@@ -31,7 +31,13 @@ class Reader extends Component {
             </div>
           </div>
         </nav>
-        <Epub src={`${getStreamHost()}/${book.id}/${download}/`} />
+        <Epub
+          src={`${getStreamHost()}/${book.id}/${download}/`}
+          onNavigationReady={(nav) => this.setState(nav)}
+          onLocationChanged={(location) => console.log(location)}
+          onReady={(book) => console.log("ready")}
+          location={0}
+        />
       </div>
     );
   }
