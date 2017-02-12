@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ePub from 'epubjs';
-import styles from './styles';
+import getStreamHost from '../../utils/get-stream-host';
 import './Epub.scss';
 
 class Epub extends Component {
@@ -31,7 +31,7 @@ class Epub extends Component {
       view: ePub.Views.iframe
     });
 
-    this.rendition.themes.register('http://localhost:3300/static/epub.css');
+    this.rendition.themes.register(`${getStreamHost()}/static/epub.css`);
     this.rendition.themes.apply('book-theme');
 
     this.rendition.display(this.props.location || 0);

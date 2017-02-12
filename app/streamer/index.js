@@ -38,6 +38,7 @@ class Streamer {
     portfinder.getPort((err, openPort) => {
       if (err) throw err;
       const port = openPort;
+      global.streamerPort = port;
       this.server = this.app.listen(port, serverError => {
         if (serverError) {
           return console.error(serverError);
