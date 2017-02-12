@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import ePub, { Rendition, Layout } from 'epubjs';
+import ePub from 'epubjs';
+import styles from './styles';
 import './Epub.scss';
 
 class Epub extends Component {
@@ -29,6 +30,9 @@ class Epub extends Component {
       manager: ePub.ViewManagers.default,
       view: ePub.Views.iframe
     });
+
+    this.rendition.themes.register('http://localhost:3300/static/epub.css');
+    this.rendition.themes.apply('book-theme');
 
     this.rendition.display(this.props.location || 0);
 

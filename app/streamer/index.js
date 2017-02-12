@@ -12,6 +12,7 @@ class Streamer {
     this.port = port;
     this.server = undefined;
     this._zips = {};
+    this.staticPath = path.resolve(__dirname, '..', 'static');
   }
 
   start() {
@@ -19,6 +20,7 @@ class Streamer {
       res.send('∞');
     });
 
+    this.app.use('/static', express.static(this.staticPath));
     this.app.get('/:book/:asset(*)', (req, res) => {
       const bookPath = path.join(this.repo, req.params.book);
 
@@ -31,8 +33,6 @@ class Streamer {
           res.status(400).end();
         });
     });
-
-    // this.app.use('/books', express.static(`${this.repo}`))
 
     portfinder.basePort = 3300;
     portfinder.getPort((err, openPort) => {
@@ -99,4 +99,3 @@ class Streamer {
 }
 
 export default Streamer;
-
