@@ -11,6 +11,17 @@ class Reader extends Component {
     this.handleReady = this.handleReady.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.book) {
+      let location = localStorage.getItem(`${this.props.book.id}-location`);
+
+      if (location) {
+        console.log("location is", location);
+        this.setState({ ...this.state, location });
+      }
+    }
+  }
+
   _navigationReady(nav) {
     this.setState({ ...this.state, nav });
   }
@@ -93,7 +104,10 @@ class Reader extends Component {
         <Epub
           src={`${getStreamHost()}/${book.id}/${download}/`}
           onNavigationReady={ this._navigationReady.bind(this) }
-          onLocationChanged={(location) => console.log(location)}
+          onLocationChange={(location) => {
+            // console.log(location.start)
+            localStorage.setItem(`${book.id}-location`, location.start);
+          }}
           onReady={ this.handleReady.bind(this) }
           location={this.state.location}
         />

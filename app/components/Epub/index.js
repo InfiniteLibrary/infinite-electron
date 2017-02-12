@@ -8,6 +8,7 @@ class Epub extends Component {
   constructor(props) {
     super(props);
     this.book = ePub();
+    this._visibleLocation = 0;
   }
 
   componentWillMount() {
@@ -22,6 +23,8 @@ class Epub extends Component {
   }
 
   componentDidMount() {
+    this._visibleLocation = this.props.location || 0;
+
     this._start();
   }
 
@@ -32,7 +35,8 @@ class Epub extends Component {
 
   componentWillUpdate(nextProps) {
     if (nextProps.location !== this.props.location) {
-      this.rendition.display(nextProps.location);
+      this._visibleLocation = nextProps.location;
+      this.rendition.display(this._visibleLocation);
     }
 
     if (nextProps.theme !== this.props.theme) {
@@ -61,10 +65,10 @@ class Epub extends Component {
     this.rendition.themes.register(`${getStreamHost()}/static/epub.css`);
     this.rendition.themes.apply('book-theme');
 
-    this.rendition.display(this.props.location || 0);
+    this.rendition.display(this._visibleLocation);
 
     this.rendition.on('locationChanged', (visibleLocation) => {
-      this._visibleLocation = visibleLocation;
+      this._visibleLocation = visibleLocation.start;
 
       if (this.props.onLocationChange) {
         this.props.onLocationChange(visibleLocation);
@@ -106,6 +110,7 @@ class Epub extends Component {
     document.removeEventListener('keyup', this.keyListener, false);
     window.removeEventListener('resize', this._onResize, false);
   }
+
   _onResize() {
     this._stop();
     clearTimeout(this.resizeTimeout);
