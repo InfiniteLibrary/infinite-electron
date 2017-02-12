@@ -22,8 +22,10 @@ export default class App extends Component {
 
   componentWillMount() {
     this.index = lunr(function indexCreator() {
-      this.field('title', { boost: 10 });
-      this.field('author', { boost: 10 });
+      this.field('title', { boost: 100 });
+      this.field('author', { boost: 100 });
+      this.field('summary');
+      this.field('category', { boost: 10});
       this.ref('id');
     });
 
