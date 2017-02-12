@@ -21,11 +21,34 @@ class Reader extends Component {
     this.setState({location : item.href })
   }
 
+  tocToggle() {
+    let navMenu = document.getElementById('toc-nav');
+
+    if (navMenu.classList.contains('is-visible')) {
+      navMenu.classList.remove('is-visible');
+    } else {
+      navMenu.classList.add('is-visible');
+    }
+  }
+
   render() {
     const { book } = this.props;
     const download = encodeURIComponent(book.download);
     return (
       <div className="reader__container">
+        <div id="toc-nav" className="reader__toc">
+          <div>
+            {
+              this.state.nav.map((item, index) =>
+                <a key={`navitem_${index}`}
+                   className="nav-item"
+                   onClick={() => { this._onNavClick(item) }}>
+                  {item.label}
+                </a>
+              )
+            }
+          </div>
+        </div>
         <nav className="nav is-fixed">
           <div className="nav-left">
             <Link to="/" className="nav-item">
@@ -40,21 +63,11 @@ class Reader extends Component {
             </div>
           </div>
           <div className="nav-right">
-            <div className="nav-item">
+            <a className="nav-item" onClick={() => { this.tocToggle()}}>
               <span className="icon">
                 <i className="fa fa-navicon" />
               </span>
-            </div>
-            <div>
-            {
-              this.state.nav.map((item, index) =>
-                <a className="nav-item"
-                  onClick={() => { this._onNavClick(item) }}>
-                  {item.label}
-                </a>
-              )
-            }
-            </div>
+            </a>
           </div>
         </nav>
         <Epub

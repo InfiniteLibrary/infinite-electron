@@ -1,3 +1,7 @@
+@import '../../variables.scss';
+
+$toc-menu-width: 300px;
+
 .reader__container {
   background-color: #fcfcfc;
 }
@@ -9,4 +13,26 @@
   position: absolute;
   width: 100vw;
   z-index: 500;
+}
+
+.reader__toc {
+  background-color: $dark-gray;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: auto;
+  transform: translateX(-100%);
+  transition: all 0.1s ease-in-out;
+  width: $toc-menu-width;
+  z-index: 600;
+
+  &.is-visible { transform: translateX(0%); }
 }
