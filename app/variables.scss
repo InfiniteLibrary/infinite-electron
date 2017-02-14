@@ -28,6 +28,7 @@ $blue: #1565c0;
 $dark-gray: #333;
 $medium-gray: #999;
 $light-gray: #ddd;
+$white: #fff;
 
 // Font Colors
 $base-font-color: $dark-gray;
@@ -48,3 +49,9 @@ $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $l
 // Animations
 $base-duration: 150ms;
 $base-timing: ease;
+
+@keyframes teaser {
+  from { opacity: 1; }
+  80% { opacity: 1; }
+  to { opacity: 0; }
+}

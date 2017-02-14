@@ -43,11 +43,14 @@ class Reader extends Component {
 
   tocToggle() {
     const navMenu = document.getElementById('toc-nav');
+    const curtain = document.getElementById('curtain');
 
     if (navMenu.classList.contains('is-visible')) {
       navMenu.classList.remove('is-visible');
+      curtain.classList.remove('is-visible');
     } else {
       navMenu.classList.add('is-visible');
+      curtain.classList.add('is-visible');
     }
   }
 
@@ -55,7 +58,8 @@ class Reader extends Component {
     const { book } = this.props;
     const download = encodeURIComponent(book.download);
     return (
-      <div className="reader__container">
+      <div className="reader">
+
         <div id="toc-nav" className="reader__toc">
           <ul>
             <h2>Table of Contents</h2>
@@ -76,6 +80,7 @@ class Reader extends Component {
             }
           </ul>
         </div>
+
         <nav className="nav is-fixed">
           <div className="nav-left">
             <Link to="/" className="nav-item">
@@ -97,18 +102,25 @@ class Reader extends Component {
             </a>
           </div>
         </nav>
-        {this.state.isLoading && <Loader />}
-        <Epub
-          src={`${getStreamHost()}/${book.id}/${download}/`}
-          onLocationChange={(location) => {
-                // console.log(location.start)
-            localStorage.setItem(`${book.id}-location`, location.start);
-          }}
 
-          onNavigationReady={this.handleNavReady}
-          onReady={this.handleReady}
-          location={this.state.location}
+        {this.state.isLoading && <Loader />}
+
+        <Epub
+            src={`${getStreamHost()}/${book.id}/${download}/`}
+            onNavigationReady={this.handleNavReady}
+            onReady={this.handleReady}
+            location={this.state.location}
+            onLocationChange={(location) => {
+                localStorage.setItem(`${book.id}-location`, location.start);
+              }}
         />
+
+        <div
+            id='curtain'
+            className="reader__curtain"
+            onClick={ () => { this.tocToggle(); }}>
+        </div>
+
       </div>
     );
   }
