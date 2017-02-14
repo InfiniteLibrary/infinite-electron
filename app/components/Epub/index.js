@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, findDOMNode } from 'react';
 import ePub from 'epubjs';
 import getStreamHost from '../../utils/get-stream-host';
 import './Epub.scss';
@@ -8,6 +8,7 @@ class Epub extends Component {
   constructor(props) {
     super(props);
     this.book = ePub();
+    this._visibleLocation = 0;
   }
 
   componentWillMount() {
@@ -22,6 +23,36 @@ class Epub extends Component {
   }
 
   componentDidMount() {
+    this._visibleLocation = this.props.location || 0;
+
+    this._start();
+  }
+
+
+  componentWillUnmount() {
+    this._stop();
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.location !== this.props.location) {
+      this._visibleLocation = nextProps.location;
+      this.rendition.display(this._visibleLocation);
+    }
+
+    if (nextProps.theme !== this.props.theme) {
+      this.rendition.themes.apply(nextProps.theme);
+    }
+
+    if (nextProps.fontSize !== this.props.fontSize) {
+      this.rendition.themes.fontSize(nextProps.fontSize);
+    }
+  }
+
+  display(what) {
+    this.rendition && this.rendition.display(what);
+  }
+
+  _start() {
     this.rendition = this.book.renderTo('stage', {
       flow: this.props.flow || 'paginated',
       minSpreadWidth: 550,
@@ -34,10 +65,10 @@ class Epub extends Component {
     this.rendition.themes.register(`${getStreamHost()}/static/epub.css`);
     this.rendition.themes.apply('book-theme');
 
-    this.rendition.display(this.props.location || 0);
+    this.rendition.display(this._visibleLocation);
 
     this.rendition.on('locationChanged', (visibleLocation) => {
-      this._visibleLocation = visibleLocation;
+      this._visibleLocation = visibleLocation.start;
 
       if (this.props.onLocationChange) {
         this.props.onLocationChange(visibleLocation);
@@ -64,6 +95,7 @@ class Epub extends Component {
       if (this.props.onReady) this.props.onReady(this.book);
       this.rendition.on('keyup', this.keyListener);
       document.addEventListener('keyup', this.keyListener, false);
+      window.addEventListener('resize', this._onResize.bind(this), false);
     });
 
     this.book.loaded.navigation.then((nav) => {
@@ -71,29 +103,17 @@ class Epub extends Component {
     });
   }
 
-  componentWillUpdate(nextProps) {
-    if (nextProps.location !== this.props.location) {
-      this.rendition.display(nextProps.location);
-    }
-
-    if (nextProps.theme !== this.props.theme) {
-      this.rendition.themes.apply(nextProps.theme);
-    }
-
-    if (nextProps.fontSize !== this.props.fontSize) {
-      this.rendition.themes.fontSize(nextProps.fontSize);
-    }
-  }
-
-  componentWillUnmount() {
+  _stop() {
+    this.rendition.destroy();
     this.rendition.off('keyup', this.keyListener);
     document.removeEventListener('keyup', this.keyListener, false);
+    window.removeEventListener('resize', this._onResize, false);
   }
 
-  display(what) {
-    if (this.rendition) {
-      this.rendition.display(what);
-    }
+  _onResize() {
+    this._stop();
+    clearTimeout(this.resizeTimeout);
+    this.resizeTimeout = setTimeout(this._start.bind(this), 250);
   }
 
   render() {
