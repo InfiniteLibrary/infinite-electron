@@ -1,8 +1,8 @@
 {
-  "name": "electron-react-boilerplate",
-  "productName": "electron-react-boilerplate",
-  "version": "1.0.0",
-  "description": "Electron application boilerplate based on React, React Router, Webpack, React Hot Loader for rapid application development",
+  "name": "infinite-electron",
+  "productName": "Infinite Library Reader",
+  "version": "0.1.0",
+  "description": "An Electron based reader for Project Gutenberg books",
   "main": "./main.js",
   "author": {
     "name": "Infinite Library",

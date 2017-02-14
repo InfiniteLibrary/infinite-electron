@@ -9,24 +9,31 @@ class Reader extends Component {
   constructor(props) {
     super(props);
     this.handleReady = this.handleReady.bind(this);
+    this.handleNavReady = this.handleNavReady.bind(this);
   }
 
   componentDidMount() {
     if (this.props.book) {
-      let location = localStorage.getItem(`${this.props.book.id}-location`);
+      const location = localStorage.getItem(`${this.props.book.id}-location`);
 
       if (location) {
-        console.log("location is", location);
+        console.log('location is', location);
         this.setState({ ...this.state, location });
       }
     }
   }
 
-  _navigationReady(nav) {
+  state = {
+    isLoading: true,
+    nav: [],
+    location: 0
+  };
+
+  handleNavReady(nav) {
     this.setState({ ...this.state, nav });
   }
 
-  _onNavClick(item) {
+  handleNavClick(item) {
     this.setState({ ...this.state, location: item.href });
   }
 
@@ -35,24 +42,13 @@ class Reader extends Component {
   }
 
   tocToggle() {
-    let navMenu = document.getElementById('toc-nav');
+    const navMenu = document.getElementById('toc-nav');
 
     if (navMenu.classList.contains('is-visible')) {
       navMenu.classList.remove('is-visible');
     } else {
       navMenu.classList.add('is-visible');
     }
-
-  }
-
-  state = {
-    isLoading: true,
-    nav: [],
-    location : 0
-  };
-
-  handleReady() {
-    this.setState({ ...this.state, isLoading: false });
   }
 
   render() {
@@ -64,14 +60,15 @@ class Reader extends Component {
           <ul>
             <h2>Table of Contents</h2>
             {
-              this.state.nav.map((item, index) =>
-                <li>
-                  <a key={`navitem_${index}`}
-                     className="reader__toc__item"
-                     onClick={() => {
-                         this._onNavClick(item)
-                         this.tocToggle()
-                       }}>
+              this.state.nav.map(item =>
+                <li key={item.id}>
+                  <a
+                    className="reader__toc__item"
+                    onClick={() => {
+                      this.handleNavClick(item);
+                      this.tocToggle();
+                    }}
+                  >
                     {item.label}
                   </a>
                 </li>
@@ -93,7 +90,7 @@ class Reader extends Component {
             </div>
           </div>
           <div className="nav-right">
-            <a className="nav-item" onClick={() => { this.tocToggle()}}>
+            <a className="nav-item" onClick={() => { this.tocToggle(); }}>
               <span className="icon">
                 <i className="fa fa-navicon" />
               </span>
@@ -103,12 +100,13 @@ class Reader extends Component {
         {this.state.isLoading && <Loader />}
         <Epub
           src={`${getStreamHost()}/${book.id}/${download}/`}
-          onNavigationReady={ this._navigationReady.bind(this) }
           onLocationChange={(location) => {
-            // console.log(location.start)
+                // console.log(location.start)
             localStorage.setItem(`${book.id}-location`, location.start);
           }}
-          onReady={ this.handleReady.bind(this) }
+
+          onNavigationReady={this.handleNavReady}
+          onReady={this.handleReady}
           location={this.state.location}
         />
       </div>

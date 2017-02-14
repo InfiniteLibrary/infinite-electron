@@ -6,7 +6,7 @@
   "main": "main.js",
   "scripts": {
     "test": "npm run lint",
-    "lint": "eslint --cache --format=node_modules/eslint-formatter-pretty .",
+    "lint": "eslint --cache --ignore-path .gitignore --format=node_modules/eslint-formatter-pretty .",
     "lint-fix": "npm run lint -- --fix",
     "hot-server": "cross-env NODE_ENV=development node --max_old_space_size=2096 -r babel-register server.js",
     "build-main": "cross-env NODE_ENV=production node -r babel-register ./node_modules/webpack/bin/webpack --config webpack.config.electron.js --progress --profile --colors",
@@ -23,8 +23,8 @@
   },
   "browserslist": "electron 1.4",
   "build": {
-    "productName": "ElectronReact",
-    "appId": "org.develar.ElectronReact",
+    "productName": "Infinity Library Reader",
+    "appId": "org.infinity.reader",
     "category": "public.app-category.tools",
     "dmg": {
       "contents": [
@@ -44,10 +44,13 @@
     "files": [
       "dist/",
       "node_modules/",
+      "static/",
       "app.html",
       "main.js",
       "main.js.map",
-      "package.json"
+      "books.json",
+      "package.json",
+      "*.png"
     ],
     "win": {
       "target": "nsis"
@@ -105,12 +108,14 @@
     "electron-devtools-installer": "^2.0.1",
     "eslint": "^3.14.0",
     "eslint-config-airbnb": "^14.0.0",
+    "eslint-config-standard": "^6.2.1",
     "eslint-formatter-pretty": "^1.1.0",
     "eslint-plugin-compat": "^1.0.1",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-promise": "^3.4.0",
     "eslint-plugin-react": "^6.9.0",
+    "eslint-plugin-standard": "^2.0.1",
     "express": "^4.14.1",
     "extract-text-webpack-plugin": "^1.0.1",
     "fbjs-scripts": "^0.7.1",
@@ -139,10 +144,11 @@
     "epubjs": "0.3.12",
     "font-awesome": "^4.7.0",
     "lunr": "^0.7.2",
+    "mime": "^1.3.4",
     "mkdirp": "^0.5.1",
-    "mz": "^2.6.0",
     "node-fetch": "^1.6.3",
     "node-stream-zip": "^1.3.7",
+    "pify": "^2.3.0",
     "portfinder": "^1.0.13",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",

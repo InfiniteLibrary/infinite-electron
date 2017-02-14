@@ -101,10 +101,9 @@ class Epub extends Component {
     this.book.loaded.navigation.then((nav) => {
       if (this.props.onNavigationReady) this.props.onNavigationReady(nav.toc);
     });
-
   }
 
-  _stop(){
+  _stop() {
     this.rendition.destroy();
     this.rendition.off('keyup', this.keyListener);
     document.removeEventListener('keyup', this.keyListener, false);
@@ -114,7 +113,7 @@ class Epub extends Component {
   _onResize() {
     this._stop();
     clearTimeout(this.resizeTimeout);
-    this.resizeTimeout = setTimeout(this._start.bind(this), 250 );
+    this.resizeTimeout = setTimeout(this._start.bind(this), 250);
   }
 
   render() {
