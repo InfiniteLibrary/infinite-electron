@@ -1,6 +1,8 @@
 # infinite-electron
-An [Electron](http://electron.atom.io/)-based cross-platform desktop reader for free ebooks (EPUB) from Project Gutenberg and [Unglue.it](https://unglue.it). 
+An [Electron](http://electron.atom.io/)-based cross-platform desktop reader for free ebooks (EPUB) from Project Gutenberg and [Unglue.it](https://unglue.it).
 The InfiniteLibrary team has grown out of two [Codex Hackathons](http://codexhackathon.com/).
+
+![Infinite Reader](http://i.imgur.com/iLMH42N.jpg)
 
 ## Stretch goals
 
@@ -59,22 +61,6 @@ $ UPGRADE_EXTENSIONS=1 yarn run dev
 $ set UPGRADE_EXTENSIONS=1 && yarn run dev
 ```
 
-## CSS Modules
-
-This boilerplate out of the box is configured to use [css-modules](https://github.com/css-modules/css-modules).
-
-All `.css` file extensions will use css-modules unless it has `.global.css`.
-
-If you need global styles, stylesheets with `.global.css` will not go through the
-css-modules loader. e.g. `app.global.css`
-
-If you want to import global css libraries (like `bootstrap`), you can just write the following code in `.global.css`:
-
-```css
-@import "~bootstrap/dist/css/bootstrap.css";
-```
-
-
 ## Packaging
 
 To package apps for the local platform:
@@ -107,12 +93,6 @@ $ yarn run build
 $ yarn start
 ```
 
-To run End-to-End Test
-
-```bash
-$ yarn run build
-$ yarn run test-e2e
-```
 
 #### Options
 

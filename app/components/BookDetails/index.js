@@ -5,10 +5,9 @@ import './BookDetails.scss';
 export default class BookDetails extends Component {
   render() {
     const book = this.props.book;
-    console.log(this.props.book);
-
     const bookSummary = {
-      __html: book.summary || 'No Description Available.' };
+      __html: book.summary || 'No Description Available.'
+    };
 
     return (
       <div className="book-details">
