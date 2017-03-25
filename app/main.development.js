@@ -57,9 +57,12 @@ app.on('ready', async () => {
   const streamer = new Streamer(booksRepo);
 
   mainWindow = new BrowserWindow({
+    // frame: false,
+    // titleBarStyle: 'hidden-inset',
+    height: 800,
+    movable: true,
     show: false,
-    width: 1400,
-    height: 800
+    width: 1000
   });
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
@@ -76,7 +79,7 @@ app.on('ready', async () => {
   });
 
   if (process.env.NODE_ENV === 'development') {
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
     mainWindow.webContents.on('context-menu', (e, props) => {
       const { x, y } = props;
 

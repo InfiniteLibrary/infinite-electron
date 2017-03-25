@@ -1,10 +1,11 @@
 @import '../../variables.scss';
 
 nav.is-fixed {
-  position: fixed !important;
-  top: 0;
+  -webkit-app-region: drag;
   left: 0;
+  position: fixed !important;
   right: 0;
+  top: 0;
   z-index: 500;
 }
 
