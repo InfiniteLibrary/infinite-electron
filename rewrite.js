@@ -13,7 +13,7 @@ const findDownload = acquire => {
   const result = {};
 
   if (download) {
-      result.download = download.href;
+    result.download = download.href;
   }
 
   return result;
@@ -21,7 +21,7 @@ const findDownload = acquire => {
 
 const findImage = images => {
   const result = {};
-  if (images && images.length){
+  if (images && images.length) {
     const image = images.pop();
     const imageUrl = image.href;
 
@@ -34,7 +34,7 @@ const findImage = images => {
   return result;
 };
 
-var rewritten = publications
+const rewritten = publications
   .map(publication => {
     const image = findImage(publication.images);
     const download = findDownload(publication.acquire);
@@ -42,17 +42,17 @@ var rewritten = publications
     const idParts = publication.metadata.id.split('/');
     const id = Number(idParts[idParts.length - 2]);
     return Object.assign({},
-      download, image, omit(publication.metadata, '\@type', 'summary',  'category',  'rating'),
+      download, image, omit(publication.metadata, '@type', 'summary', 'category', 'rating'),
       {
         id,
         summary: sanitizeHtml(publication.metadata.summary),
-        rating: parseInt(publication.metadata.rating.ratingValue),
+        rating: parseInt(publication.metadata.rating.ratingValue, 10),
         // Randomly select books as own:
         isOwn: Math.random() > 0.993
       }
     );
   })
-  .filter(publication => publication.download);
+  .filter(publication => publication.download)
+  .sort((a, b) => b.rating - a.rating);
 
-rewritten.sort(function(a, b) {return b.rating - a.rating;});
 process.stdout.write(JSON.stringify(rewritten));
