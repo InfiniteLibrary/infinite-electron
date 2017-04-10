@@ -12,22 +12,22 @@ class Reader extends Component {
     this.handleNavReady = this.handleNavReady.bind(this);
   }
 
-  componentDidMount() {
-    if (this.props.book) {
-      const location = localStorage.getItem(`${this.props.book.id}-location`);
-
-      if (location) {
-        console.log('location is', location);
-        this.setState({ ...this.state, location });
-      }
-    }
-  }
-
   state = {
     isLoading: true,
     nav: [],
     location: 0
   };
+
+  componentWillMount() {
+    if (this.props.book) {
+      const location = localStorage.getItem(`${this.props.book.id}-location`);
+
+      if (location) {
+        this.setState({ ...this.state, location });
+      }
+    }
+  }
+
 
   handleNavReady(nav) {
     this.setState({ ...this.state, nav });

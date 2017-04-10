@@ -1,4 +1,4 @@
-import React, { Component, findDOMNode } from 'react';
+import React, { Component } from 'react';
 import ePub from 'epubjs';
 import getStreamHost from '../../utils/get-stream-host';
 import './Epub.scss';
@@ -29,10 +29,6 @@ class Epub extends Component {
   }
 
 
-  componentWillUnmount() {
-    this._stop();
-  }
-
   componentWillUpdate(nextProps) {
     if (nextProps.location !== this.props.location) {
       this._visibleLocation = nextProps.location;
@@ -48,8 +44,15 @@ class Epub extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this._stop();
+  }
+
+
   display(what) {
-    this.rendition && this.rendition.display(what);
+    if (this.rendition) {
+      this.rendition.display(what);
+    }
   }
 
   _start() {
