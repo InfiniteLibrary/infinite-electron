@@ -25,9 +25,9 @@ export default class BookDetails extends Component {
           <h2 className="book-details__info__author">by {book.author.name || book.author}</h2>
           <p dangerouslySetInnerHTML={bookSummary} className="book-details__info__description" />
           {
-            book.category.length > 0 &&
+            book.subjects && book.subjects.length &&
             <p className="book-details__info__subjects">
-              {book.category.join(', ')}
+              {book.subjects.join(', ')}
             </p>
           }
           <div className="book-details__info__buttons">
