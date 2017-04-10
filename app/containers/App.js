@@ -36,7 +36,7 @@ export default class App extends Component {
   }
 
   search(query) {
-    if (!query || query.length < 5) {
+    if (!query || query.length < 3) {
       return this.setState({
         ...this.state,
         isSearching: false
